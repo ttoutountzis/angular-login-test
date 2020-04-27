@@ -1,7 +1,8 @@
 
-import { Component, OnInit } from '@angular/core';
-import {ApiService} from '../api.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ApiService } from '../api.service';
 import { CustomerModel } from './../model/customer';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-home-page',
@@ -20,7 +21,13 @@ export class HomePageComponent implements OnInit {
   submitted = false;
   selectedIndex: any;
 
+
+
   constructor(private api: ApiService) { }
+
+  @ViewChild('form')
+  form: NgForm;
+
 
   ngOnInit() {
     this.getUsers();
@@ -91,6 +98,6 @@ export class HomePageComponent implements OnInit {
       const i = this.customers.splice(this.customers.findIndex(x => x.id === this.deleteCustomer.id), 0);
       this.getUsers();
       this.deleteCustomer = null;
-    })
+    });
   }
 }
